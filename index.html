@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+<script src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js'></script>
+<script>
+$(document).ready(function() {
+  setInterval(function() {
+    table.ajax.reload();
+  }, 3000);
+
+  table = $('#table').DataTable( {
+    "processing": true,
+    "ajax": {
+      "url": "./store.json",
+      "dataSrc": function(j) {
+        // Holding vars
+        var json = {};
+        json.data = [];
+
+        // Loop over the data store
+        $.each(j, function(key, val) {
+	
+	  // Check if it has an Answered section
+          answered = "No";
+          $.each(val.section_names, function(key, val) { if (val == 'Answered') {answered = "Yes"}; });
+          val.answered = answered;
+	  
+	  // Strikethrough
+	  if (answered == "Yes") { val.message = "<s>" + val.message + "</s>" }
+	  
+	  // Fix the timestamp
+	  let t = new Date(val.timestamp);
+	  var m = t.getMinutes();
+	  m = m > 9 ? m : '0' + m;
+	  let s = t.getHours() + ":" + m;
+	  val.timestamp = s
+	  
+	  // Append to table
+          json.data.push(val)
+        });
+        return json.data;
+      },
+    },
+    "columns": [
+      { "data": "timestamp" },
+      { "data": "reporter_display_name" },
+      { "data": "message" },
+      { "data": "answered" },
+    ],
+    "order": [[3,'asc'],[0,'asc']],
+    "paging": false
+  });
+});
+</script>
+<table id="table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>When</th>
+                <th>ID</th>
+                <th>Question</th>
+		<th>Answered</th>
+            </tr>
+        </thead>
+</table>

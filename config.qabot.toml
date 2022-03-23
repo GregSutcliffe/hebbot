@@ -1,0 +1,34 @@
+bot_user_id = '?????'
+# bot password is specified via the BOT_PASSWORD environment variable
+reporting_room_id = '?????'
+admin_room_id = '????'
+notice_emoji = '❔'
+ack_emoji = '✅'
+image_emoji = '📷️'
+image_markdown = '> ![]({{file}})'
+video_emoji = '📹️'
+video_markdown = '> {{< video src="{{file}}" >}}'
+verbs = ["reports", "says", "announces"]
+ack_text = ""
+min_length = 0
+#"✅ Thanks for the report {}, I'll store your update!",
+update_config_command = "sh /data/update_config.sh"
+editors = [
+    'moderator1:example.net'
+]
+
+[[sections]]
+emoji = '☑️'
+name = 'Answered'
+title = 'Answered Questions'
+order = 100
+usual_reporters = []
+
+[[projects]]
+emoji = '😱'
+name = 'unused'
+title = 'unused'
+description = 'unused'
+website = 'unused'
+default_section = 'Answered'
+usual_reporters = []
