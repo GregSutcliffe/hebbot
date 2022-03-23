@@ -15,6 +15,7 @@ pub struct Config {
     pub video_markdown: String,
     pub verbs: Vec<String>,
     pub ack_text: String,
+    pub min_length: usize,
     pub update_config_command: String,
     pub editors: Vec<String>,
     pub sections: Vec<Section>,

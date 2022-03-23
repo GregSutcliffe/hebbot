@@ -7,6 +7,7 @@ image_markdown = '> ![]({{file}})'
 video_markdown = '> {{< video src="{{file}}" >}}'
 verbs = ["reports", "says", "announces"]
 ack_text = "✅ Thanks for the report {{user}}, I'll store your update!"
+min_length = 30
 update_config_command = "sh /data/update_config.sh"
 editors = [
     '@user1:domain.io',
