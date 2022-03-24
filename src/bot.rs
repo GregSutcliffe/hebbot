@@ -931,6 +931,14 @@ impl Bot {
 
         // Check min message length
         if news.message().len() > self.config.min_length {
+            // React with ack_emoji if configured
+            if !self.config.ack_emoji.is_empty() {
+                self.send_reaction(
+                    &self.config.ack_emoji,
+                    &EventId::try_from(news.event_id.as_str()).unwrap(),
+                )
+                .await;
+            }
             if notify_reporter && !self.config.ack_text.is_empty() {
                 let msg = &self
                     .config
